@@ -81,6 +81,28 @@ The screenshot below shows a **"Go Live"** workflow configured to run three acti
 
 ---
 
+## Known Limitations
+
+### Start / Stop Streaming with YouTube (native OBS integration)
+
+If your OBS streaming service is set to **YouTube** using OBS's built-in YouTube integration, the **Start Streaming** action may pause and open the "Manage Broadcast" dialog, requiring you to manually create or select a broadcast before the stream starts. This is a limitation of OBS's YouTube output — it cannot be bypassed via the WebSocket API.
+
+**How to avoid this:**
+
+| OBS Streaming Service | Behavior with Start/Stop Streaming actions |
+|---|---|
+| Custom RTMP (Aitum, Restream, fixed stream key, etc.) | Works instantly — no dialogs |
+| Twitch (native OBS integration) | Works instantly |
+| YouTube (native OBS integration) | Requires pre-creating a broadcast in OBS before pressing the button |
+
+**Recommended solutions:**
+
+- **Custom RTMP** — Switch OBS's streaming service to Custom RTMP and point it at your multistreaming service (e.g. Aitum, Restream) or a fixed stream key URL. OBS's WebSocket `StartStream` fires immediately with no prompts.
+- **YouTube Persistent Stream** — In YouTube Studio, create a persistent/reusable stream with a fixed stream key. Configure OBS as Custom RTMP using that key. Titles and descriptions can still be updated in YouTube Studio before each session; the VOD will need to be manually titled/published afterward.
+- **Pre-create the broadcast** — If you must use the native YouTube integration, open OBS → "Manage Broadcast" → create/select your broadcast *before* pressing your Stream Deck button. The workflow will then proceed without interruption.
+
+---
+
 ## Project Status
 
 🚧 **In active development** — core functionality is working but the plugin has not yet been submitted to the Elgato Marketplace. Testing is ongoing before the first public release.
@@ -90,6 +112,8 @@ Areas currently being worked on:
 - Further real-world testing and edge case hardening
 - Icon artwork (current icons are placeholders)
 - Marketplace submission preparation
+- Import/Export Workflows Feature
+- Manage Broadcast / Create Broadcast & Start Streaming
 
 ## Contributing
 
