@@ -69,6 +69,18 @@ Once released, you will be able to install it directly from the Elgato Marketpla
 5. Add more actions, reorder with ↑ / ↓, remove with ✕
 6. Settings save automatically — no submit button needed
 
+## Example Workflow
+
+The screenshot below shows a **"Go Live"** workflow configured to run three actions from a single Stream Deck button press:
+
+1. **Switch Scene** → `Starting Soon` (immediately, no delay)
+2. **Switch Scene** → `Live Scene` (after a 300,000 ms / 5-minute delay)
+3. **Start Streaming** (after an additional 3,000 ms delay)
+
+![Go Live example workflow](docs/example-workflow.png)
+
+---
+
 ## Project Status
 
 🚧 **In active development** — core functionality is working but the plugin has not yet been submitted to the Elgato Marketplace. Testing is ongoing before the first public release.
