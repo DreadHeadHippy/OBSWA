@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+  <rect width="72" height="72" rx="10" fill="#23272A"/>
+  <circle cx="36" cy="30" r="12" fill="none" stroke="#4A90D9" stroke-width="3"/>
+  <circle cx="36" cy="30" r="5" fill="#4A90D9"/>
+  <text x="36" y="58" font-family="sans-serif" font-size="9" font-weight="bold"
+        fill="#868C95" text-anchor="middle" letter-spacing="0.5">OBS</text>
+</svg>

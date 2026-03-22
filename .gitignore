@@ -1,0 +1,23 @@
+# ── Build output ──────────────────────────────────────────────────────────────
+dist/
+com.dreadheadhippy.obswa.sdPlugin/dist/
+
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+
+# ── Release artefacts ──────────────────────────────────────────────────────────
+*.streamDeckPlugin
+
+# ── Type declaration maps & source maps (generated) ───────────────────────────
+**/*.d.ts.map
+**/*.js.map
+
+# ── OS / editor noise ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.suo
+.vscode/settings.json
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+npm-debug.log*
+*.log

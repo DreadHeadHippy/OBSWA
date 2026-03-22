@@ -1,0 +1,48 @@
+{
+  "SDKVersion": 2,
+  "Author": "DreadHeadHippy",
+  "CodePath": "dist/plugin.js",
+  "Description": "Zapier-inspired OBS workflow automator for Stream Deck. Chain OBS actions together and trigger entire sequences from a single button press.",
+  "Name": "OBS Workflow Automation",
+  "Icon": "assets/icons/plugin",
+  "URL": "https://github.com/DreadHeadHippy/OBSWA",
+  "UUID": "com.dreadheadhippy.obswa",
+  "Version": "0.1.0.0",
+  "Category": "OBS Workflow Automation",
+  "CategoryIcon": "assets/icons/category",
+  "Software": {
+    "MinimumVersion": "6.4"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.15"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "disabled"
+  },
+  "Actions": [
+    {
+      "Name": "OBS Workflow",
+      "UUID": "com.dreadheadhippy.obswa.workflow",
+      "Icon": "assets/icons/action",
+      "Tooltip": "Run a sequence of OBS actions when pressed",
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "ui/property-inspector.html",
+      "States": [
+        {
+          "Image": "assets/icons/action",
+          "TitleAlignment": "middle",
+          "FontSize": 10,
+          "Title": ""
+        }
+      ]
+    }
+  ]
+}

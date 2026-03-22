@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--
+    CSP: no inline scripts/styles. connect-src allows the local StreamDeck
+    WebSocket only, blocking any external network requests from the PI.
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self'; script-src 'self'; connect-src ws://127.0.0.1:*" />
+  <title>OBS Automation</title>
+  <link rel="stylesheet" href="css/pi.css" />
+</head>
+<body>
+  <div class="pi">
+
+    <!-- ── OBS Connection (Global) ───────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">OBS Connection</span>
+        <span class="badge">Global</span>
+      </div>
+
+      <div class="field">
+        <label for="obs-host">Host</label>
+        <input id="obs-host" type="text" value="localhost" placeholder="localhost"
+               autocomplete="off" spellcheck="false" maxlength="255" />
+      </div>
+
+      <div class="field">
+        <label for="obs-port">Port</label>
+        <input id="obs-port" type="number" value="4455" min="1" max="65535" step="1" />
+      </div>
+
+      <div class="field field--toggle">
+        <label for="obs-use-auth">Auth</label>
+        <label class="toggle" aria-label="Use password authentication">
+          <input id="obs-use-auth" type="checkbox" />
+          <span class="track"><span class="thumb"></span></span>
+          <span class="toggle-label">Use password</span>
+        </label>
+      </div>
+
+      <div class="field" id="password-row" style="display:none">
+        <label for="obs-password">Password</label>
+        <div class="input-wrap">
+          <input id="obs-password" type="password" placeholder="WebSocket password"
+                 autocomplete="current-password" maxlength="512" />
+          <button class="icon-btn" id="toggle-pw" type="button"
+                  title="Show password" aria-pressed="false">
+            <!-- eye icon -->
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 3C5 3 1.73 7.11 1 10c.73 2.89 4 7 9 7s8.27-4.11
+                9-7c-.73-2.89-4-7-9-7zm0 12a5 5 0 110-10 5 5 0 010 10zm0-8a3
+                3 0 100 6 3 3 0 000-6z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="field field--actions">
+        <button id="test-btn" class="btn btn--primary" type="button">
+          Test Connection
+        </button>
+        <span id="conn-status" class="status" data-type="idle" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <!-- ── Workflow ───────────────────────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">Workflow</span>
+        <button id="refresh-obs" class="btn btn--ghost btn--sm" type="button"
+                title="Refresh scene & source lists from OBS">&#8635;</button>
+      </div>
+
+      <!-- Button label -->
+      <div class="field">
+        <label for="workflow-label">Label</label>
+        <input id="workflow-label" type="text" placeholder="e.g. Go Live"
+               maxlength="50" autocomplete="off" spellcheck="false" />
+      </div>
+
+      <!-- Action list (populated by JS) -->
+      <div id="action-list" class="action-list" role="list"></div>
+      <p id="action-empty" class="muted action-empty">No actions yet — add one below.</p>
+
+      <!-- OBS data not available notice -->
+      <p id="obs-hint" class="muted obs-hint" style="display:none">
+        Connect to OBS first to populate scene &amp; source dropdowns.
+      </p>
+
+      <!-- Add action row -->
+      <div class="add-row">
+        <select id="action-type-picker" class="add-picker">
+          <option value="">— Choose action type —</option>
+          <optgroup label="Scene">
+            <option value="switchScene">Switch Scene</option>
+            <option value="toggleSource">Toggle Source</option>
+            <option value="setSourceVisibility">Set Source Visibility</option>
+          </optgroup>
+          <optgroup label="Audio">
+            <option value="muteSource">Mute Source</option>
+            <option value="unmuteSource">Unmute Source</option>
+            <option value="toggleMute">Toggle Mute</option>
+          </optgroup>
+          <optgroup label="Stream / Record">
+            <option value="startStream">Start Streaming</option>
+            <option value="stopStream">Stop Streaming</option>
+            <option value="startRecord">Start Recording</option>
+            <option value="stopRecord">Stop Recording</option>
+            <option value="toggleRecord">Toggle Recording</option>
+          </optgroup>
+          <optgroup label="Other">
+            <option value="triggerHotkey">Trigger Hotkey</option>
+            <option value="setTextContent">Set Text Source</option>
+            <option value="wait">Wait</option>
+          </optgroup>
+        </select>
+        <button id="add-action-btn" class="btn btn--primary btn--sm" type="button">
+          Add
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/pi.js"></script>
+</body>
+</html>

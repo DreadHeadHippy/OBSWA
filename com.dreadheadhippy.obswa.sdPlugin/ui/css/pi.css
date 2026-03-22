@@ -1,0 +1,435 @@
+/* ── OBS Automation — Property Inspector styles ────────────────────────────── */
+:root {
+  --bg:           #1e2124;
+  --bg-section:   #2a2d31;
+  --bg-input:     #16181b;
+  --border:       #3d4147;
+  --border-focus: #4a90d9;
+  --text:         #d4d4d4;
+  --text-dim:     #868c95;
+  --accent:       #1a7fd4;
+  --accent-hover: #1569b0;
+  --success:      #4caf50;
+  --error:        #e05252;
+  --radius:       6px;
+  --gap:          10px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────────── */
+
+.pi {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Section ───────────────────────────────────────────────────────────────── */
+
+.section {
+  background: var(--bg-section);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+/* "Global" pill badge */
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: #1e3a5f;
+  color: #7eb8f7;
+  border: 1px solid #2d5a9e;
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+
+/* ── Fields ────────────────────────────────────────────────────────────────── */
+
+.field {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.field > label:first-child {
+  color: var(--text-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.field--toggle {
+  align-items: center;
+}
+
+.field--actions {
+  grid-template-columns: auto 1fr;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+/* ── Text / number inputs ──────────────────────────────────────────────────── */
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 13px;
+  padding: 5px 8px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus {
+  border-color: var(--border-focus);
+}
+
+/* Hide native number spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { display: none; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Password row ──────────────────────────────────────────────────────────── */
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrap input {
+  padding-right: 30px;
+}
+
+.icon-btn {
+  position: absolute;
+  right: 6px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 3px;
+  line-height: 0;
+  transition: color 0.15s;
+}
+
+.icon-btn:hover { color: var(--text); }
+.icon-btn svg   { width: 15px; height: 15px; display: block; }
+
+/* ── Toggle switch ─────────────────────────────────────────────────────────── */
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.track {
+  width: 34px;
+  height: 18px;
+  background: var(--border);
+  border-radius: 9px;
+  position: relative;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: var(--text-dim);
+  border-radius: 50%;
+  transition: left 0.2s, background 0.2s;
+}
+
+.toggle input:checked ~ .track              { background: var(--accent); }
+.toggle input:checked ~ .track .thumb       { left: 18px; background: #fff; }
+
+.toggle-label {
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+/* ── Button ────────────────────────────────────────────────────────────────── */
+
+.btn {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn--primary:hover:not(:disabled) { background: var(--accent-hover); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── Connection status indicator ──────────────────────────────────────────── */
+
+.status {
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 16px;
+}
+
+.status[data-type="idle"] { display: none; }
+
+.status::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--border);
+}
+
+.status[data-type="connected"] { color: var(--success); }
+.status[data-type="connected"]::before { background: var(--success); }
+
+.status[data-type="error"] { color: var(--error); }
+.status[data-type="error"]::before { background: var(--error); }
+
+.status[data-type="testing"]::before {
+  background: var(--accent);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Misc ──────────────────────────────────────────────────────────────────── */
+
+.muted {
+  color: var(--text-dim);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* ── Ghost & small button variants ────────────────────────────────────────── */
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border-color: var(--border);
+}
+.btn--ghost:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+
+.btn--sm {
+  padding: 3px 10px;
+  font-size: 11px;
+}
+
+/* ── Workflow builder ──────────────────────────────────────────────────────── */
+
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.action-empty,
+.obs-hint {
+  text-align: center;
+  padding: 4px 0;
+}
+
+/* ── Action card ──────────────────────────────────────────────────────────── */
+
+.action-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.action-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+  gap: 6px;
+}
+
+.action-index {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+}
+
+.action-type-label {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-ctrl-group {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.ctrl-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  border-radius: 3px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.ctrl-btn:hover         { color: var(--text); background: rgba(255,255,255,0.08); border-color: var(--border); }
+.ctrl-btn.del:hover     { color: var(--error); border-color: var(--error); }
+.ctrl-btn:disabled      { opacity: 0.25; cursor: default; }
+
+.action-body {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* Reuse .field grid inside action cards */
+.action-body .field {
+  grid-template-columns: 82px 1fr;
+}
+
+.action-body select {
+  width: 100%;
+  background: var(--bg-section);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 12px;
+  padding: 4px 6px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.action-body select:focus { border-color: var(--border-focus); }
+
+.action-body input[type="text"],
+.action-body input[type="number"] {
+  font-size: 12px;
+  padding: 4px 7px;
+}
+
+/* delay row — sits at the bottom of every card */
+.delay-row {
+  border-top: 1px solid var(--border);
+  margin-top: 2px;
+  padding-top: 6px;
+}
+.delay-row label { color: var(--text-dim); font-size: 11px; }
+
+/* ── Add action row ────────────────────────────────────────────────────────── */
+
+.add-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.add-picker {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  font-size: 12px;
+  padding: 4px 6px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.add-picker:focus { border-color: var(--border-focus); }
+
